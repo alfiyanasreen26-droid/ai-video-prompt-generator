@@ -1,0 +1,30 @@
+
+# AI Video Prompt Generator
+
+An open-source tool that helps creators generate creative prompts for AI video generation.
+
+## Features
+- Cinematic video prompts
+- Multiple video styles
+- Camera movement options
+- Vertical 9:16 video format
+- Easy prompt generation
+- Copy generated prompts
+
+## Technology
+- HTML
+- CSS
+- JavaScript
+- GitHub Pages
+
+## Live Website
+https://alfiyanasreen26-droid.github.io/ai-video-prompt-generator/
+
+## Project Vision
+Our goal is to build an AI-powered video prompt generator that helps content creators, designers and marketers create professional video prompts easily.
+
+## Current Status
+Early-stage open-source project. Currently uses built-in prompt generation logic. AI API integration is planned for a future version.
+
+## License
+MIT
