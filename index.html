@@ -4,126 +4,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Video Prompt Generator</title>
+<title>AI Image to Video Studio</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#10111b;
-  color:white;
-  padding:25px 15px;
-}
-.container{
-  max-width:650px;
-  margin:auto;
-  background:#1d2030;
-  padding:25px;
-  border-radius:18px;
-}
-h1{text-align:center;color:#a78bfa}
-p{text-align:center;color:#c4c4d4}
-label{display:block;margin-top:20px;margin-bottom:8px}
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border-radius:9px;
-  border:1px solid #555;
-  background:#292d40;
-  color:white;
-  font-size:16px;
-}
-textarea{min-height:90px}
-button{
-  width:100%;
-  padding:15px;
-  margin-top:18px;
-  border:0;
-  border-radius:9px;
-  background:#8b5cf6;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-#result{min-height:150px}
+body{margin:0;font-family:Arial,sans-serif;background:#10111c;color:white;padding:20px}
+.container{max-width:650px;margin:auto}
+h1{text-align:center;color:#c7a7ff}
+.subtitle{text-align:center;color:#bbb}
+.panel{background:#1d2030;padding:20px;border-radius:16px;margin-top:20px}
+label{display:block;margin:15px 0 8px}
+input,textarea,select,button{width:100%;padding:13px;border-radius:9px;border:1px solid #555;background:#292d40;color:white;font-size:16px}
+textarea{min-height:100px}
+button{background:#8955ed;border:0;font-weight:bold;margin-top:18px}
+#preview{width:100%;max-height:350px;object-fit:contain;margin-top:15px;border-radius:10px;display:none}
+#message{color:#d4baff;line-height:1.5}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>AI Video Prompt Generator</h1>
-<p>Create creative prompts for AI video tools</p>
-
+<h1>✨ AI Video Studio</h1>
+<p class="subtitle">Turn your images into amazing videos</p>
+<div class="panel">
+<label>Upload your image</label>
+<input type="file" id="image" accept="image/*">
+<img id="preview" alt="Image preview">
 <label>Describe your video</label>
-<textarea id="idea" placeholder="Example: A cinematic scene of a worker building a house"></textarea>
-
-<label>Video style</label>
-<select id="style">
-<option>Cinematic</option>
-<option>Realistic</option>
-<option>Commercial Advertisement</option>
-<option>Documentary</option>
-<option>3D Animation</option>
+<textarea id="prompt" placeholder="Example: Make this sofa rotate slowly in a beautiful living room..."></textarea>
+<label>Image type</label>
+<select id="type">
+<option>Product / Furniture</option>
+<option>People / Fashion</option>
+<option>Other</option>
 </select>
-
-<label>Camera movement</label>
-<select id="camera">
-<option>Slow camera movement</option>
-<option>Tracking shot</option>
-<option>Wide angle shot</option>
-<option>Close-up shot</option>
-<option>Drone shot</option>
+<label>Video duration</label>
+<select id="duration">
+<option>5 seconds</option>
+<option>10 seconds</option>
 </select>
-
-<label>Video format</label>
-<select id="format">
-<option>9:16 Vertical</option>
-<option>16:9 Landscape</option>
-<option>1:1 Square</option>
+<label>Aspect ratio</label>
+<select id="ratio">
+<option>9:16 - Instagram Reels</option>
+<option>16:9 - YouTube</option>
+<option>1:1 - Instagram Post</option>
 </select>
-
-<button onclick="generate()">Generate Prompt</button>
-
-<label>Your Generated Prompt</label>
-<textarea id="result" placeholder="Your prompt will appear here..." readonly></textarea>
-
-<button onclick="copyPrompt()">Copy Prompt</button>
+<button onclick="generate()">Create Video</button>
+<p id="message"></p>
 </div>
-
+</div>
 <script>
-function generate(){
- const idea=document.getElementById("idea").value.trim();
- if(!idea){
-   alert("Please describe your video first!");
-   return;
- }
- const style=document.getElementById("style").value;
- const camera=document.getElementById("camera").value;
- const format=document.getElementById("format").value;
-
- const prompt=`Create a ${style.toLowerCase()} video showing ${idea}.
-
-Camera: ${camera}.
-Format: ${format}.
-Quality: High resolution, detailed visuals, natural lighting, realistic movement, professional composition.
-
-Make the scene visually engaging and maintain consistent subjects throughout the video.`;
-
- document.getElementById("result").value=prompt;
+const imageInput=document.getElementById('image');
+imageInput.addEventListener('change',function(){
+const file=this.files[0];
+if(file){
+document.getElementById('preview').src=URL.createObjectURL(file);
+document.getElementById('preview').style.display='block';
 }
-
-function copyPrompt(){
- const result=document.getElementById("result");
- if(!result.value){
-   alert("Generate a prompt first!");
-   return;
- }
- navigator.clipboard.writeText(result.value)
- .then(()=>alert("Prompt copied successfully!"))
- .catch(()=> {
-   result.select();
-   document.execCommand("copy");
-   alert("Prompt copied!");
- });
+});
+function generate(){
+if(!imageInput.files.length){
+document.getElementById('message').textContent='Please upload an image first.';
+return;
+}
+document.getElementById('message').textContent='Your image is ready! The video generation service still needs to be connected. We will do that in the next stage.';
 }
 </script>
 </body>
